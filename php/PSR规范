@@ -1,0 +1,139 @@
+> PSR是一系列关于PHP开发的规范，分有好几个版本，自己学的也较为肤浅，但还是希望能时常查看规范，为了方便记忆和遵循，我把关键词为必须的捡拾出来，做个简单地必要规范的记录。(就是个搬砖的。。。)
+> https://github.com/PizzaLiu/PHP-FIG
+> http://segmentfault.com/a/1190000002521577
+# 官方发布文件版本
+* `PSR-0`(已弃用)
+* [`PSR-1`  基本代码规范](https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-1-basic-coding-standard-cn.md)
+* [`PSR-2` 代码风格规范](https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-2-coding-style-guide-cn.md)
+* PSR-2 补充文档
+* [`PSR-3` 日志接口规范](https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-3-logger-interface-cn.md)
+* [`PSR-4`  自动载入](https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-4-autoloader-cn.md)
+* `PSR-5`和`PSR-6`投票还未通过
+#  必须
+### PSR-1 `基本代码规范`
+* PHP代码文件必`以 <?php 或 <?= 标签开始`；
+
+* PHP代码文件必须`以 不带BOM的 UTF-8 编码`；
+
+* 命名空间以及类必须`符合 PSR 的自动加载规范：PSR-0 或 PSR-4 中的一个`；
+
+* 类的命名必须`遵循 StudlyCaps 大写开头的驼峰命名规范`；
+
+* 类中的`常量所有字母都必须大写`，单词间用下划线分隔；
+
+* `方法名称`必须`符合 camelCase 式的小写开头驼峰命名规范`。
+
+* PHP代码必须`使用 <?php ?> 长标签 `或` <?= ?> 短输出标签`； 一定不可使用其它自定义标签。
+
+* 命名空间以及类的命名必须`遵循 PSR-0`.
+
+* PHP 5.3及以后版本的代码必须`使用正式的命名空间`。
+
+* `每个类都独立为一个文件`，且`命名空间至少有一个层次`：顶级的组织名称（vendor name）
+
+### PSR-2 `代码风格规范`
+
+* 代码必须遵循 PSR-1 中的编码规范 。
+
+* 代码必须`使用4个空格符而不是 tab键 进行缩进`。
+> 备注: 使用空格而不是tab键缩进的好处在于， 避免在比较代码差异、打补丁、重阅代码以及注释时产生混淆。 并且，使用空格缩进，让对齐变得更方便。
+
+* `每个 namespace 命名空间声明语句和 use 声明语句块后面`，必须`插入一个空白行`。
+
+* 类的开始`花括号({)必须写在函数声明后自成一行`，`结束花括号(})也必须写在函数主体后自成一行`。
+
+* 方法的开始`花括号({)必须写在函数声明后自成一行`，`结束花括号(})也必须写在函数主体后自成一行`。
+
+* 类的属性和方法必须 `添加访问修饰符（private、protected 以及 public）`，` abstract 以及 final 必须声明在访问修饰符之前`，而 `static 必须声明在访问修饰符之后`。
+
+* `控制结构的关键字后必须要有一个空格符`，而`调用方法或函数时则一定不能有`。
+
+* 控制结构的开始`花括号({)必须写在声明的同一行`，而`结束花括号(})必须写在主体后自成一行`。
+
+* `控制结构的开始左括号后和结束右括号前，都一定不能有空格符`。
+
+* 所有PHP文件必须`使用Unix LF (linefeed)作为行的结束符`。
+
+* 所有PHP文件必须`以一个空白行作为结束`。
+
+* 纯PHP代码文件必须`省略最后的 ?> 结束标签`。
+
+* 每行一定`不能存在多于一条语句`。
+
+* 非空行后一定`不能有多余的空格符`。
+
+* PHP所有 关键字必须`全部小写`。
+
+* 常量 true 、false 和 null 也`必须全部小写`。
+
+### [PSR-3 `日志接口规范`](https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-3-logger-interface-cn.md)
+### [PSR-4 `自动加载规范`](https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-4-autoloader-cn.md)
+* 一个完整的类名需具有以下结构:
+```
+\<命名空间>(\<子命名空间>)*\<类名>
+完整的类名必须要有一个顶级命名空间，被称为 "vendor namespace"；
+
+完整的类名可以有一个或多个子命名空间；
+
+完整的类名必须有一个最终的类名；
+
+完整的类名中任意一部分中的下滑线都是没有特殊含义的；
+
+完整的类名可以由任意大小写字母组成；
+
+所有类名都必须是大小写敏感的。
+```
+* 当根据完整的类名载入相应的文件
+```
+完整的类名中，去掉最前面的命名空间分隔符，前面连续的一个或多个命名空间和子命名空间，作为“命名空间前缀”，其必须与至少一个“文件基目录”相对应；
+
+紧接命名空间前缀后的子命名空间必须与相应的”文件基目录“相匹配，其中的命名空间分隔符将作为目录分隔符。
+
+末尾的类名必须与对应的以 .php 为后缀的文件同名。
+
+自动加载器（autoloader）的实现一定不能抛出异常、一定不能触发任一级别的错误信息以及不应该有返回值。
+```
+
+# 建议[(更多请查看详细文档)](https://github.com/PizzaLiu/PHP-FIG)
+### PSR-1
+* PHP代码中应该只定义类、函数、常量等声明，或其他会产生 从属效应 的操作（如：生成文件输出以及修改.ini配置文件等），二者只能选其一；
+
+* 类的属性命名可以遵循 大写开头的驼峰式 ($StudlyCaps)、小写开头的驼峰式 ($camelCase) 又或者是 下划线分隔式 ($under_score)，本规范不做强制要求，但无论遵循哪种命名方式，都应该在一定的范围内保持一致。
+
+### PSR-2
+* 每行的字符数应该软性保持在80个之内， 理论上一定不可多于120个， 但一定不能有硬性限制。
+
+* 空行可以使得阅读代码更加方便以及有助于代码的分块。
+
+
+# 代码示例
+### PSR-2
+```
+<?php
+namespace Vendor\Package;
+
+use FooInterface;
+use BarClass as Bar;
+use OtherVendor\OtherPackage\BazClass;
+
+class Foo extends Bar implements FooInterface
+{
+    public function sampleFunction($a, $b = null)
+    {
+        if ($a === $b) {
+            bar();
+        } elseif ($a > $b) {
+            $foo->bar($arg1);
+        } else {
+            BazClass::bar($arg2, $arg3);
+        }
+    }
+
+    final public static function bar()
+    {
+        // method body
+    }
+}
+```
+
+> 地址：http://segmentfault.com/a/1190000003854993
